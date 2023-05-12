@@ -1,5 +1,5 @@
 {
-  "name": "ytdlp-interface-spotify",
+  "name": "spotify-dlp",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/alexahn1929/ytdlp-interface-spotify.git"
+    "url": "git+ssh://git@https://github.com/alexahn1929/spotify-dlp.git"
   },
   "author": "alexahn1929",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alexahn1929/ytdlp-interface-spotify/issues"
+    "url": "https://github.com/alexahn1929/spotify-dlp/issues"
   },
-  "homepage": "https://github.com/alexahn1929/ytdlp-interface-spotify#readme",
+  "homepage": "https://github.com/alexahn1929/spotify-dlp#readme",
   "devDependencies": {
     "electron": "^24.2.0"
   }

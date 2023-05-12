@@ -3,10 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/../libjpeg-turbo/**",
-                "${workspaceFolder}/../nana/**",
-                "${workspaceFolder}/../bit7z/**"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "cStandard": "c17",
