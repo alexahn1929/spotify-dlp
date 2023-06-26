@@ -1,5 +1,8 @@
-const { app, BrowserWindow, Menu, session } = require("electron");
-const fs = require("fs");
+const api = require("./api.js");
+
+const { app, BrowserWindow, Menu, session, ipcMain, shell } = require("electron");
+const fs = require("node:fs");
+const path = require('node:path')
 const {spawn} = require("node:child_process");
 
 const { ElectronBlocker } = require('@cliqz/adblocker-electron');
@@ -11,10 +14,11 @@ ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
   blocker.enableBlockingInSession(session.defaultSession);
 });
 
-const playlist = JSON.parse(fs.readFileSync("test.json"));
+//const playlist = JSON.parse(fs.readFileSync("test.json"));
 
 app.whenReady().then(() => {
-    parseTracks(playlist.tracks.items);
+    openStartMenu();
+    //parseTracks(playlist.tracks.items);
 });
 
 const SEARCH_URL_STEM = "https://www.youtube.com/results?search_query=";
@@ -45,11 +49,11 @@ const updateMetadata = (process, track, filename, downloadPath) => {
 /**
  * @param tracks array of track objects from spotify API
  */
-const parseTracks = (tracks) => {
+const parseTracks = (tracks, windowPosition) => {
     let idx = 0;
     let currentSearchURL = getSearchURL(tracks[idx].track);
 
-    const win = new BrowserWindow();
+    const win = new BrowserWindow({x: windowPosition[0], y: windowPosition[1]});
     win.on("page-title-updated", (event) => event.preventDefault());
 
     const updateWindow = () => {
@@ -95,7 +99,53 @@ const parseTracks = (tracks) => {
             }
         } //to add: skip to song (by idx #)
     ]);
-    Menu.setApplicationMenu(menu);
+    win.setMenu(menu);
 
     updateWindow();
+};
+
+const openStartMenu = () => {
+    const win = new BrowserWindow({
+        webPreferences: {
+          preload: path.join(__dirname, 'preload.js')
+        }
+    });
+    win.once("closed", () => app.quit()); //when the main menu window is closed, close all windows (and the whole app)
+    win.removeMenu();
+    
+    ipcMain.handle("playlist-request", async (event, ...args) => {
+        try {
+            let newPosition = win.getPosition().map(x => x+20);
+            parseTracks(await api.getPlaylistRaw(...args), newPosition);
+            win.webContents.send("playlist-found");
+        } catch (error) {
+            win.webContents.send("playlist-error", error);
+        }
+    });
+    ipcMain.handle("view-yt-dlp", async (event) => shell.openExternal("https://github.com/yt-dlp/yt-dlp")); //may not work in executable
+
+    win.loadFile("./index.html");
+};
+
+const openStartMenu = () => {
+    const win = new BrowserWindow({
+        webPreferences: {
+          preload: path.join(__dirname, 'preload.js')
+        }
+    });
+    win.once("closed", () => app.quit()); //when the main menu window is closed, close all windows (and the whole app)
+    win.removeMenu();
+    
+    ipcMain.handle("playlist-request", async (event, ...args) => {
+        try {
+            let newPosition = win.getPosition().map(x => x+20);
+            parseTracks(await api.getPlaylistRaw(...args), newPosition);
+            win.webContents.send("playlist-found");
+        } catch (error) {
+            win.webContents.send("playlist-error", error);
+        }
+    });
+    ipcMain.handle("view-yt-dlp", async (event) => shell.openExternal("https://github.com/yt-dlp/yt-dlp")); //may not work in executable
+
+    win.loadFile("./index.html");
 };

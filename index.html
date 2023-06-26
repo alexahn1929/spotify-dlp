@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>spotify-dlp</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="wrapper">
+        <div id="label">Spotify-dlp</div>
+        <div id="sublabel">Automate downloading Spotify playlists to mp3 using <a id="yt-dlp-link" href="">yt-dlp</a></div>
+        <form>
+            <input type="text" placeholder="Left-click to paste Spotify playlist URL:" id="url" readonly>
+        </form>
+        <div id="error-log"></div>
+    </div>
+    <script src='./renderer.js'></script>
+  </body>
+</html>
+<!--on hover, show clipboard url. on click or ctrl-v, paste-->

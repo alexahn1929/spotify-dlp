@@ -19,7 +19,7 @@ const getToken = async () => {
     return output.access_token;
 };
 
-const getPlaylistAPIUrl = (link) => {
+const getPlaylistAPIUrl = (link) => { //NOTE: move to renderer? to know if url should be sent prior to message passing
     const HOSTNAME = "open.spotify.com";
     const PATH_PREFIX = "/playlist/";
     
@@ -49,19 +49,20 @@ const getPlaylist = async (apiURL) => {
     return res.json();
 };
 
-const getPlaylistFromRawURL = async (rawURL) => {
-    let apiURL = getPlaylistAPIUrl(rawURL);
-    let playlistJSON = await getPlaylist(apiURL);
-    let songs = playlistJSON.items;
-    while (playlistJSON.next !== null) {
-        playlistJSON = await getPlaylist(playlistJSON.next);
-        songs = songs.concat(playlistJSON.items);
+module.exports = {
+    getPlaylistRaw: async (rawURL) => {
+        let apiURL = getPlaylistAPIUrl(rawURL);
+        let playlistJSON = await getPlaylist(apiURL);
+        let songs = playlistJSON.items;
+        while (playlistJSON.next !== null) {
+            playlistJSON = await getPlaylist(playlistJSON.next);
+            songs = songs.concat(playlistJSON.items);
+        }
+        return songs;
     }
-    return songs;
 }
 
-
-getPlaylistFromRawURL("https://open.spotify.com/playlist/3AFvuS9t4qLhaaLBHRcSqk?si=0b8e8e8e9d1447ad").then(c => {
+/*getPlaylistRaw("https://open.spotify.com/playlist/3AFvuS9t4qLhaaLBHRcSqk?si=0b8e8e8e9d1447ad").then(c => {
     console.log(c)
     console.log(c.length)
-})
+})*/
