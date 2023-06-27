@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -9,7 +13,7 @@
 
 #url {
     height: 32px;
-    width: 720px;
+    width: 80vh;
     font-size: 12pt;
     text-align: center;
 }
@@ -26,4 +30,41 @@
 
 #error-log {
     margin-top: 32px;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    width: 90vh;
+    gap: 2px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row input {
+    width: 50vh;
+    font-size: 10pt;
+}
+
+label {
+    font-size: 10pt;
+}
+
+.title {
+    align-self: center;
+    font-size: 16pt;
+}
+
+.heading {
+    margin: 8px 0;
+    font-size: 14pt;
+}
+
+#save {
+    margin-top: 8px;
+    align-self: center;
+    width: 10vh;
 }

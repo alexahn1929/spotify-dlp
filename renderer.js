@@ -17,7 +17,7 @@ input.onmouseenter = async (event) => {
     await electronAPI.test();*/
 };
 input.onmouseleave = (event) => {
-    event.target.placeholder = "Left-click to paste Spotify playlist URL:";
+    event.target.placeholder = "Click to paste Spotify playlist URL:";
 };
 input.onmouseup = (event) => {
     //console.log(event.target.placeholder)
@@ -30,3 +30,28 @@ let dlpLink = document.getElementById("yt-dlp-link");
 dlpLink.onmouseup = (event) => {
     electronAPI.viewYtDlp();
 }
+
+let input_id = document.getElementById("id");
+let input_secret = document.getElementById("secret");
+let saveButton = document.getElementById("save");
+
+saveButton.onmouseup = (event) => {
+    electronAPI.saveAPIKey(input_id.value.trim(), input_secret.value.trim());
+};
+
+let input_downloads = document.getElementById("downloads");
+let input_ytdlp = document.getElementById("ytdlp");
+
+electronAPI.onPopulateSettings((event, settings) => {
+    input_id.value = settings.client_id;
+    input_secret.value = settings.client_secret;
+    input_downloads.value = settings.download_path;
+    input_ytdlp.value = settings.ytdlp_path;
+});
+
+input_downloads.onmouseup = (event) => {
+    electronAPI.updateDownloadsPath();
+};
+input_ytdlp.onmouseup = (event) => {
+    electronAPI.updateYtdlpPath();
+};

@@ -1,7 +1,8 @@
-require('dotenv').config();
 const url = require("node:url");
 
 let savedToken = "PLACEHOLDER";
+let CLIENT_ID = "";
+let CLIENT_SECRET = "";
 
 const getToken = async () => {
     const options = {
@@ -11,7 +12,7 @@ const getToken = async () => {
         }
     };
 
-    let res = await fetch(`https://accounts.spotify.com/api/token?grant_type=client_credentials&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}`, options);
+    let res = await fetch(`https://accounts.spotify.com/api/token?grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`, options);
     if (res.status != 200) {
         throw new Error("Could not obtain new access token");
     }
@@ -59,6 +60,10 @@ module.exports = {
             songs = songs.concat(playlistJSON.items);
         }
         return songs;
+    },
+    updateKey: (settings) => {
+        CLIENT_ID = settings.client_id;
+        CLIENT_SECRET = settings.client_secret;
     }
 }
 

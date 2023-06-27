@@ -9,10 +9,31 @@
     <div class="wrapper">
         <div id="label">Spotify-dlp</div>
         <div id="sublabel">Automate downloading Spotify playlists to mp3 using <a id="yt-dlp-link" href="">yt-dlp</a></div>
-        <form>
-            <input type="text" placeholder="Left-click to paste Spotify playlist URL:" id="url" readonly>
-        </form>
+        <input placeholder="Click to paste Spotify playlist URL:" id="url" readonly>
         <div id="error-log"></div>
+
+        <div class="settings">
+          <div class="title">Settings -- all fields must be valid!</div>
+          <div class="heading">API Key</div>
+          <div class="row">
+              <label for="id">Client ID</label>
+              <input id="id">
+          </div>
+          <div class="row">
+              <label for="secret">Client Secret</label>
+              <input id="secret">
+          </div>
+          <div class="heading">Paths</div>
+          <div class="row">
+              <label for="ytdlp">yt-dlp Executable Path</label>
+              <input id="ytdlp" readonly>
+          </div>
+          <div class="row">
+              <label for="downloads">Downloads Folder</label>
+              <input id="downloads" readonly>
+          </div>
+          <button id="save">Save</button>
+        </div>
     </div>
     <script src='./renderer.js'></script>
   </body>
