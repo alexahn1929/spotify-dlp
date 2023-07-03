@@ -4,7 +4,7 @@ Spotify-dlp is a desktop application built with Electron (Chromium + Node.js) th
 
 ## Demo
 
-!(https://github.com/alexahn1929/spotify-dlp/blob/main/thumbnail.JPG?raw=true)
+![spotify-dlp Demo Video](https://github.com/alexahn1929/spotify-dlp/blob/main/thumbnail.JPG?raw=true)
 
 ## Setup and Usage
 
