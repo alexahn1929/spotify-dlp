@@ -8,7 +8,7 @@ Spotify-dlp is a desktop application built with Electron (Chromium + Node.js) th
 
 ## Setup and Usage
 
-[spotify-dlp.exe](https://github.com/alexahn1929/spotify-dlp/releases/tag/v1.0.0)
+Download here: [spotify-dlp.exe](https://github.com/alexahn1929/spotify-dlp/releases/tag/v1.0.0)
 
 Before using the app, you must fill out all fields in the settings menu. This includes two fields for your Spotify API key, the path to yt-dlp.exe ([download here](https://github.com/yt-dlp/yt-dlp/releases)), and an output folder for your mp3 downloads.
 
