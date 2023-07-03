@@ -28,6 +28,7 @@ input.onmouseup = (event) => {
 
 let dlpLink = document.getElementById("yt-dlp-link");
 dlpLink.onmouseup = (event) => {
+    event.preventDefault(); //stop from clearing settings
     electronAPI.viewYtDlp();
 }
 

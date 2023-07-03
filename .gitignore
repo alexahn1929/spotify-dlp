@@ -1,6 +1,6 @@
 node_modules
-img
-buttons.html
-commands.txt
+downloads
+settings.json
+dist
 sample.js
-scrape.py
+yt-dlp.exe

@@ -1,11 +1,12 @@
 {
   "name": "spotify-dlp",
   "version": "1.0.0",
-  "description": "",
+  "description": "Download Spotify playlists to mp3 via Youtube",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -mwl"
   },
   "repository": {
     "type": "git",
@@ -18,11 +19,24 @@
   },
   "homepage": "https://github.com/alexahn1929/spotify-dlp#readme",
   "devDependencies": {
-    "electron": "^24.2.0"
+    "electron": "^24.2.0",
+    "electron-builder": "^24.4.0"
   },
   "dependencies": {
     "@cliqz/adblocker-electron": "^1.26.5",
     "cross-fetch": "^3.1.5",
     "mp3tag.js": "^3.3.2"
+  },
+  "build": {
+    "appId": "xyz.alexahn.spotify-dlp",
+    "mac": {
+      "target": "mas"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }

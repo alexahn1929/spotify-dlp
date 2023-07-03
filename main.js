@@ -39,7 +39,6 @@ const getWindowTitle = (track, i, len) => {
 const updateMetadata = (process, track, filename, downloadPath) => {
     if (downloadPath.charAt(downloadPath.length-1) != "/") {
         downloadPath += "/";
-        console.log("/ added to metadata download path")
     }
     process.once("close", () => {
         const mp3tag = new MP3Tag(fs.readFileSync(downloadPath+filename)); //downloadPath must end with /
@@ -80,9 +79,7 @@ const parseTracks = (tracks, windowPosition) => {
             click: () => {
                 if (win.webContents.getURL().includes(VIDEO_URL_STEM)) { //check if reasonable url to download (ex. if you paste in youtube.com to yt-dlp, it'll try to download all recommendations)
                     const dl_process = spawn(settings.ytdlp_path, ["-o", `tempfile_${idx}`, "-x", "--audio-format", "mp3", win.webContents.getURL()], {cwd: settings.download_path});
-                    //const dl_process = spawn("../yt-dlp.exe", ["-o", `tempfile_${idx}`, "-x", "--audio-format", "mp3", win.webContents.getURL()], {cwd: settings.download_path}); //to add: cfg with path to yt-dlp, path to downloads directory
-                    updateMetadata(dl_process, tracks[idx.track], `tempfile_${idx}.mp3`, settings.download_path);
-                    //updateMetadata(dl_process, tracks[idx].track, `tempfile_${idx}.mp3`, "./downloads/");
+                    updateMetadata(dl_process, tracks[idx].track, `tempfile_${idx}.mp3`, settings.download_path);
                     idx += 1;
                     updateWindow();
                 } //also to add: direct stdout of child process to main window. Maybe also put a progress bar on the main window?
