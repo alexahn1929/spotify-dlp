@@ -15,14 +15,14 @@ ElectronBlocker.fromPrebuiltAdsAndTracking(fetch).then((blocker) => {
   blocker.enableBlockingInSession(session.defaultSession);
 });
 
-let settings = require(SETTINGS_PATH);
+let settings = {"client_id":"","client_secret":"","download_path":"","ytdlp_path":""}
+if (fs.existsSync(SETTINGS_PATH)) {
+    settings = JSON.parse(fs.readFileSync(SETTINGS_PATH));
+}
 api.updateKey(settings);
-
-//const playlist = JSON.parse(fs.readFileSync("test.json"));
 
 app.whenReady().then(() => {
     openStartMenu();
-    //parseTracks(playlist.tracks.items);
 });
 
 const SEARCH_URL_STEM = "https://www.youtube.com/results?search_query=";
@@ -155,8 +155,6 @@ const openStartMenu = () => {
     });
 
     win.loadFile("./index.html").then(() => win.webContents.send("populate-settings", settings));
-
-    //getFilePath(win, true).then((path) => console.log("path: "+path));
 };
 
 const getFilePath = async (win, isFolder) => {
