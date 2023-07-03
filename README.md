@@ -2,13 +2,13 @@
 
 Spotify-dlp is a desktop application built with Electron (Chromium + Node.js) that helps download Spotify playlists to mp3 using the open-source Youtube downloader [yt-dlp](https://github.com/yt-dlp/yt-dlp). Currently the app is only available on Windows.
 
+DOWNLOAD HERE: [spotify-dlp.exe](https://github.com/alexahn1929/spotify-dlp/releases/tag/v1.0.0)
+
 ## Demo Video (click me!)
 
 [![spotify-dlp Demo Video](https://github.com/alexahn1929/spotify-dlp/blob/main/thumbnail.JPG?raw=true)](https://www.youtube.com/watch?v=cn6sDpyXrLw)
 
 ## Setup and Usage
-
-Download here: [spotify-dlp.exe](https://github.com/alexahn1929/spotify-dlp/releases/tag/v1.0.0)
 
 Before using the app, you must fill out all fields in the settings menu. This includes two fields for your Spotify API key, the path to yt-dlp.exe ([download here](https://github.com/yt-dlp/yt-dlp/releases)), and an output folder for your mp3 downloads.
 
